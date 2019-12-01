@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        maven { url "https://kotlin.bintray.com/kotlin-dev" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.70-dev-1833"
+    }
+}
+
+apply plugin: "kotlin2js"
+apply plugin: 'java'
+
+def outDir = "${buildDir}/kotlin2js/main/"
+compileKotlin2Js.kotlinOptions.moduleKind = "plain"
+compileKotlin2Js.kotlinOptions.outputFile = outDir + "lib.js"
+compileKotlin2Js.kotlinOptions.freeCompilerArgs += ["-Xir-produce-js", "-Xgenerate-dts"]
+
+repositories {
+    maven { url "https://kotlin.bintray.com/kotlin-dev" }
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:1.3.70-dev-1833"
+}
